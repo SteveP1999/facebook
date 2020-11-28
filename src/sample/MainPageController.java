@@ -10,8 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
+import java.awt.image.DataBuffer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
@@ -69,10 +72,6 @@ public class MainPageController implements Initializable {
         Username.setText(currentUser.getName());
     }
 
-    public void initMPC(User user) {
-        currentUser = user;
-    }
-
     public void setText(String text) {
         UserLoggedIn.setText(text);
     }
@@ -83,7 +82,7 @@ public class MainPageController implements Initializable {
         Age.setText(age);
     }
 
-    public void clock() throws InterruptedException {
+    /*public void clock() throws InterruptedException {
         Thread clock = new Thread();
         {
             try {
@@ -103,7 +102,7 @@ public class MainPageController implements Initializable {
             }
         }
         clock.start();
-    }
+    }*/
 
     public void HandleDataChangeClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DataChange.fxml"));
@@ -124,6 +123,8 @@ public class MainPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initData();
         loadData();
+        Database db = new Database();
+        this.users = db.ReadUsers();
     }
 }
 
