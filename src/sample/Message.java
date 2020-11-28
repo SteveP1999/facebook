@@ -1,21 +1,23 @@
 package sample;
 
-public class Message {
-    String Sender;
-    String Reciever;
+import java.io.Serializable;
+
+public class Message implements Serializable {
+    User Sender;
+    User Reciever;
     String Meassage;
 
-    public Message(String sender, String reciever, String meassage) {
+    public Message(User sender, User reciever, String meassage) {
         Sender = sender;
         Reciever = reciever;
         Meassage = meassage;
     }
 
-    public String getSender() {
+    public User getSender() {
         return Sender;
     }
 
-    public String getReciever() {
+    public User getReciever() {
         return Reciever;
     }
 
@@ -23,11 +25,11 @@ public class Message {
         return Meassage;
     }
 
-    public void setSender(String sender) {
+    public void setSender(User sender) {
         Sender = sender;
     }
 
-    public void setReciever(String reciever) {
+    public void setReciever(User reciever) {
         Reciever = reciever;
     }
 

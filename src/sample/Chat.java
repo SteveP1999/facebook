@@ -2,15 +2,15 @@ package sample;
 
 import java.io.*;
 
-public class Database {
-    public AllUsers ReadUsers() {
-        File f = new File("database.ser");
+public class Chat {
+    public AllMessages ReadMessages() {
+        File f = new File("chatstream.ser");
         if (f.exists()) {
             try {
-                AllUsers u;
-                FileInputStream fileIn = new FileInputStream("database.ser");
+                AllMessages u = null;
+                FileInputStream fileIn = new FileInputStream("chatstream.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                u = (AllUsers) in.readObject();
+                u = (AllMessages) in.readObject();
                 in.close();
                 fileIn.close();
                 return u;
@@ -18,12 +18,12 @@ public class Database {
                 i.printStackTrace();
             }
         }
-        return new AllUsers();
+        return new AllMessages();
     }
 
-    public void SaveUsers(AllUsers users) {
+    public void SaveMessages(AllMessages users) {
         try {
-            FileOutputStream fileOut = new FileOutputStream("database.ser");
+            FileOutputStream fileOut = new FileOutputStream("chatstream.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(users);
             out.close();

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     AllUsers users = new AllUsers();
+    private static Stage pStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -16,17 +17,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        pStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-        primaryStage.setTitle("Fosbook");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        pStage.setTitle("Fosbook");
+        pStage.setScene(new Scene(root));
+        pStage.setResizable(false);
+        pStage.show();
 
-        //
-        /*users.AddUser(new User("Kis Sanyi", "halabe@freemail.hu", "asdqwe", 15));
-        users.AddUser(new User("Kis Peti", "beni0413@freemail.hu", "Kola", 20));
-        users.AddUser(new User("Kis Zoli", "lali1212@freemail.hu", "Cica", 34));
-        new Database().SaveUsers(users);*/
+        users = new Database().ReadUsers();
+        users.getUsers().get(0).AddFriend(users.getUsers().get(1));
+        new Database().SaveUsers(users);
         for (User user:users.getUsers())
             System.out.println(user.getName());
         //
@@ -34,5 +34,9 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         root = loader.load();
         MainMenuController mmc = loader.getController();
+    }
+
+    public static Stage getpStage() {
+        return pStage;
     }
 }

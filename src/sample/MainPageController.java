@@ -13,12 +13,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.xml.crypto.Data;
-import java.awt.image.DataBuffer;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
@@ -35,41 +32,33 @@ public class MainPageController implements Initializable {
     Label Timer = new Label();
     @FXML
     ListView<String> Friends = new ListView<>();
+    @FXML
+    ListView<String> ChatBox = new ListView<>();
+    @FXML
+    TextField searchFriends = new TextField();
 
     User currentUser = new User();
     ObservableList<String> list = FXCollections.observableArrayList();
-
     AllUsers users = new AllUsers();
-    User sanyi = new User("Kis Sanyi", "halabe@freemail.hu", "asdqwe", 15);
-    User peti = new User("Kis Peti", "beni0413@freemail.hu", "Kola", 20);
-    User zoli = new User("Kis Zoli", "lali1212@freemail.hu", "Cica", 34);
-
-
-    public void loadData() {
-        list.removeAll();
-        //
-        users.AddUser(sanyi);
-        users.AddUser(peti);
-        users.AddUser(zoli);
-        sanyi.AddFriend(peti);
-        sanyi.AddFriend(zoli);
-        //
-
-        for (User user : users.getUsers()) {
-            if(user.getEmail().equals(currentUser.getEmail())) {
-                System.out.println(user.getEmail());
-                for (User friend : user.getFriends()) {
-                    String a = friend.getName();
-                    System.out.println(friend);
-                    list.add(a);
-                }
-            }
-            Friends.getItems().addAll(list);
-        }
-    }
 
     public void initData() {
         Username.setText(currentUser.getName());
+    }
+
+    public void loadData(User usr) {
+        setCurrentUser(usr);
+        list.removeAll();
+        System.out.println("Current user is: " + currentUser.getEmail());
+        for (User user : users.getUsers()) {
+            if(user.getEmail().equals(currentUser.getEmail())) {
+                for (User friend : user.getFriends()) {
+                    String a = friend.getName();
+                    list.add(a);
+                }
+                break;
+            }
+            Friends.getItems().addAll(list);
+        }
     }
 
     public void setText(String text) {
@@ -104,6 +93,16 @@ public class MainPageController implements Initializable {
         clock.start();
     }*/
 
+    public ArrayList<User> searchUsers() {
+        ArrayList<User> results = new ArrayList<>();
+        for (User user : users.getUsers()) {
+            if (user.getName().contains(searchFriends.getText())) {
+                results.add(user);
+            }
+        }
+        return results;
+    }
+
     public void HandleDataChangeClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DataChange.fxml"));
         Parent root = loader.load();
@@ -122,8 +121,9 @@ public class MainPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initData();
-        loadData();
         this.users = new Database().ReadUsers();
+        //loadData();
+
     }
 }
 

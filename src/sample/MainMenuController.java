@@ -42,21 +42,23 @@ public class MainMenuController implements Initializable {
 
             for (User user : users.getUsers()) {
                 if (user.getEmail().equals(Email.getText())) {
-                    mpc.setCurrentUser(user);
-                    /*String username = user.getName();
+                    mpc.loadData(user);
+                    String username = user.getName();
                     String password = user.getPassword();
                     int age = user.getAge();
-                    mpg.setUserInformation(username, password, Integer.toString(age));*/
-                    break;
+                    mpc.setUserInformation(username, password, Integer.toString(age));
+                    break; //TODO javítsd ki bazdmeg!
                 }
+                //TODO error ablak
             }
 
-            Stage stage = new Stage();
+            Stage stage = Main.getpStage();
             stage.setScene(new Scene(root));
             stage.setTitle("Fosbook");
             stage.show();
 
-            /*Parent home_page_parent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+            /*
+            Parent home_page_parent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             Scene home_page_scene = new Scene(home_page_parent);
             Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             app_stage.setScene(home_page_scene);
