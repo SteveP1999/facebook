@@ -24,8 +24,7 @@ public class RegisterSceneController {
     AllUsers users = new AllUsers();
 
     public void handleRegisterButton(ActionEvent actionEvent) throws IOException {
-        Database db = new Database();
-        this.users = db.ReadUsers();
+        this.users = new Database().ReadUsers();
         Parent home_page_parent;
 
         if (func.IsUniqueEmail(Email.getText()) && func.verifyName(Username.getText()) && func.verifyAge(Age.getText()) && func.verifyEmail(Email.getText())) {
@@ -33,7 +32,7 @@ public class RegisterSceneController {
             users.AddUser(user);
             for (User user1 : users.getUsers())
                 System.out.println(user1.getName());
-            db.SaveUsers(users);
+            new Database().SaveUsers(users);
             home_page_parent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
         } else {
             home_page_parent = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));

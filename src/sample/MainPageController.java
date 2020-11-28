@@ -123,8 +123,7 @@ public class MainPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initData();
         loadData();
-        Database db = new Database();
-        this.users = db.ReadUsers();
+        this.users = new Database().ReadUsers();
     }
 }
 
