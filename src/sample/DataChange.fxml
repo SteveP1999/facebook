@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DataChangeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="192.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DataChangeController">
    <children>
       <Button layoutX="226.0" layoutY="18.0" mnemonicParsing="false" onAction="#ChangeUsername" text="Change Username" />
       <Button layoutX="228.0" layoutY="69.0" mnemonicParsing="false" onAction="#ChangePassword" text="Change Password" />
@@ -12,5 +12,6 @@
       <TextField fx:id="Username" layoutX="29.0" layoutY="18.0" promptText="Username" />
       <TextField fx:id="Password" layoutX="29.0" layoutY="69.0" promptText="Password" />
       <TextField fx:id="Age" layoutX="29.0" layoutY="119.0" promptText="Age" />
+      <Button layoutY="166.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="26.0" prefWidth="370.0" text="Go back" />
    </children>
 </AnchorPane>

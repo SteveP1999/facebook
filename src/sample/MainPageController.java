@@ -49,7 +49,7 @@ public class MainPageController implements Initializable {
         setCurrentUser(usr);
         list.removeAll();
         System.out.println("Current user is: " + currentUser.getEmail());
-        for (User friend : currentUser.getFriends()) {
+        for (User friend : users.getUsers()) {
             String a = friend.getName();
             list.add(a);
         }
@@ -103,6 +103,8 @@ public class MainPageController implements Initializable {
         Parent root = loader.load();
         DataChangeController dcc = loader.getController();
         dcc.ChangeLogger(UserLoggedIn.getText());
+        dcc.SetCurrentUser(currentUser);
+        dcc.ChangeAllUsers(users);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Fosbook");
@@ -115,7 +117,6 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initData();
         this.users = new Database().ReadUsers();
     }
 }

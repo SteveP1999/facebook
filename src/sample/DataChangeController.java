@@ -2,15 +2,16 @@ package sample;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import javax.xml.crypto.Data;
+import java.io.IOException;
 
 public class DataChangeController {
-    Functions func = new Functions();
-    AllUsers users = new AllUsers();
-    String logger = new String();
-    User sanyi = new User("Kis Sanyi", "halabe@freemail.hu", "asdqwe", 15);
-    User peti = new User("Kis Peti", "beni0413@freemail.hu", "Kola", 20);
-    User zoli = new User("Kis Zoli", "lali1212@freemail.hu", "Cica", 34);
     @FXML
     TextField Username = new TextField();
     @FXML
@@ -18,40 +19,66 @@ public class DataChangeController {
     @FXML
     TextField Age = new TextField();
 
+    Functions func = new Functions();
+    String logger = new String();
+    AllUsers users = new AllUsers();
+    User CurrentUser = new User();
+
+    public void SetCurrentUser(User usr) {
+        CurrentUser = usr;
+    }
+
     public void ChangeLogger(String email) {
         logger = email;
     }
 
-    public void ChangeUsername() {
-        users.AddUser(sanyi);
-        users.AddUser(peti);
-        users.AddUser(zoli);
+    public void ChangeUsername() throws IOException {
         for (int i = 0; i < users.getUsers().size(); i++) {
             if (users.getUsers().get(i).getEmail().equals(logger)) {
-                users.getUsers().get(i).setName(Username.getText());
+                if (func.verifyName(Username.getText())) {
+                    users.getUsers().get(i).setName(Username.getText());
+                    new Database().SaveUsers(users);
+                }
             }
         }
     }
 
-    public void ChangePassword() {
-        users.AddUser(sanyi);
-        users.AddUser(peti);
-        users.AddUser(zoli);
+    public void ChangePassword() throws IOException {
         for (int i = 0; i < users.getUsers().size(); i++) {
             if (users.getUsers().get(i).getEmail().equals(logger)) {
-                users.getUsers().get(i).setPassword(Password.getText());
+                if (!Password.getText().equals("")) {
+                    users.getUsers().get(i).setPassword(Password.getText());
+                    new Database().SaveUsers(users);
+                }
             }
         }
     }
 
-    public void ChangeAge() {
-        users.AddUser(sanyi);
-        users.AddUser(peti);
-        users.AddUser(zoli);
+    public void ChangeAge() throws IOException {
         for (int i = 0; i < users.getUsers().size(); i++) {
             if (users.getUsers().get(i).getEmail().equals(logger)) {
-                users.getUsers().get(i).setAge(Integer.parseInt(Age.getText()));
+                if (func.verifyAge(Age.getText())) {
+                    users.getUsers().get(i).setAge(Integer.parseInt(Age.getText()));
+                    new Database().SaveUsers(users);
+                }
             }
         }
+    }
+
+    public void ChangeAllUsers(AllUsers users) {
+        this.users = users;
+    }
+
+    public void GoBack() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+        Parent root = loader.load();
+        MainPageController mpc = loader.getController();
+        mpc.setText(logger);
+        mpc.loadData(CurrentUser);
+        mpc.setUserInformation(CurrentUser.getName(), CurrentUser.getPassword(), Integer.toString(CurrentUser.getAge()));
+        Stage stage = Main.getpStage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Fos");
+        stage.show();
     }
 }
