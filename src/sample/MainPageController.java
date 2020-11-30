@@ -49,16 +49,11 @@ public class MainPageController implements Initializable {
         setCurrentUser(usr);
         list.removeAll();
         System.out.println("Current user is: " + currentUser.getEmail());
-        for (User user : users.getUsers()) {
-            if(user.getEmail().equals(currentUser.getEmail())) {
-                for (User friend : user.getFriends()) {
-                    String a = friend.getName();
-                    list.add(a);
-                }
-                break;
-            }
-            Friends.getItems().addAll(list);
+        for (User friend : currentUser.getFriends()) {
+            String a = friend.getName();
+            list.add(a);
         }
+        Friends.getItems().addAll(list);
     }
 
     public void setText(String text) {
@@ -122,8 +117,6 @@ public class MainPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initData();
         this.users = new Database().ReadUsers();
-        //loadData();
-
     }
 }
 

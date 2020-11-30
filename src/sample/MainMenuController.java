@@ -71,7 +71,6 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Database db = new Database();
-        this.users = db.ReadUsers();
+        this.users = new Database().ReadUsers();
     }
 }
