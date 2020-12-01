@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,15 +35,20 @@ public class RegisterSceneController {
             for (User user1 : users.getUsers())
                 System.out.println(user1.getName());
             new Database().SaveUsers(users);
-            home_page_parent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        } else {
             home_page_parent = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+            Scene home_page_scene = new Scene(home_page_parent);
+            Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            app_stage.setScene(home_page_scene);
+            app_stage.show();
+        } else {
+            FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("RegistrationMistake.fxml"));
+            Parent popupRoot = popupLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(popupRoot));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Registration error");
+            stage.show();
         }
-
-        Scene home_page_scene = new Scene(home_page_parent);
-        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page_scene);
-        app_stage.show();
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {

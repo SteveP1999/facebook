@@ -17,8 +17,8 @@
             <TextField fx:id="Password" layoutX="190.0" layoutY="153.0" prefHeight="31.0" prefWidth="221.0" promptText="Password" />
             <TextField fx:id="Username" layoutX="190.0" layoutY="96.0" prefHeight="31.0" prefWidth="221.0" promptText="Username" />
             <TextField fx:id="Age" layoutX="189.0" layoutY="205.0" prefHeight="31.0" prefWidth="222.0" promptText="Age" />
-            <Button layoutX="189.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleRegisterButton" text="Register" />
-            <Button layoutX="283.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleBackButton" text="FuckThatGoBack" />
+            <Button layoutX="189.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="26.0" prefWidth="102.0" text="Register" />
+            <Button layoutX="310.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="26.0" prefWidth="102.0" text="Go back" />
          </children>
       </AnchorPane>
    </center>

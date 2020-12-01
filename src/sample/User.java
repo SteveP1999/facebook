@@ -25,6 +25,7 @@ public class User implements Serializable {
         Password = password;
         Age = age;
         Friends = new ArrayList<>();
+        feed = new Feed();
     }
 
     public User() {
@@ -33,6 +34,8 @@ public class User implements Serializable {
         Password = "default";
         Age = 10;
         Friends = new ArrayList<>();
+        feed = new Feed();
+
     }
 
     public String getName() {
