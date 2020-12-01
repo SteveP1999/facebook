@@ -135,7 +135,6 @@ public class MainPageController implements Initializable {
         for(String m : receiver) {
             a = m;
         }
-        System.out.println(a);
         cbc.LoadChat(currentUser.getEmail(), a, currentUser);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -143,6 +142,23 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
+    public User getUserByEmail(String email) {
+        for (User user : users.getUsers()) {
+            if (user.getEmail().equals(email))
+                return user;
+        }
+        return null;
+    }
+
+    public void HandleFollowbButtonClcked() {
+        ObservableList<String> follow;
+        follow = Friends.getSelectionModel().getSelectedItems();
+        String a = "";
+        for(String m : follow) {
+            a = m;
+        }
+        currentUser.AddFriend(getUserByEmail(a));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

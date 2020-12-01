@@ -32,8 +32,6 @@ public class RegisterSceneController {
         if (func.IsUniqueEmail(Email.getText()) && func.verifyName(Username.getText()) && func.verifyAge(Age.getText()) && func.verifyEmail(Email.getText())) {
             User user = new User(Username.getText(), Email.getText(), Password.getText(), Integer.parseInt(Age.getText()));
             users.AddUser(user);
-            for (User user1 : users.getUsers())
-                System.out.println(user1.getName());
             new Database().SaveUsers(users);
             home_page_parent = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
             Scene home_page_scene = new Scene(home_page_parent);
