@@ -36,6 +36,8 @@ public class MainPageController implements Initializable {
     ListView<String> ChatBox = new ListView<>();
     @FXML
     TextField searchFriends = new TextField();
+    @FXML
+    TextField Post;
 
     User currentUser = new User();
     ObservableList<String> list = FXCollections.observableArrayList();
@@ -48,9 +50,8 @@ public class MainPageController implements Initializable {
     public void loadData(User usr) {
         setCurrentUser(usr);
         list.removeAll();
-        System.out.println("Current user is: " + currentUser.getEmail());
         for (User friend : users.getUsers()) {
-            String a = friend.getName();
+            String a = friend.getEmail();
             list.add(a);
         }
         Friends.getItems().addAll(list);
@@ -114,6 +115,34 @@ public class MainPageController implements Initializable {
     public void setCurrentUser(User user) {
         currentUser = user;
     }
+
+    public void PostButtonClicked() {
+        System.out.println(currentUser.getEmail());
+        /*
+        currentUser.getFeed().AddFeed(Post.getText());
+        new Database().SaveUsers(users);
+        System.out.println(currentUser.getFeed());
+        */
+    }
+
+    public void HandleChatBoxClicked() throws IOException {
+        ObservableList<String> receiver;
+        receiver = Friends.getSelectionModel().getSelectedItems();
+        String a = "";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChatBox.fxml"));
+        Parent root = loader.load();
+        ChatBoxController cbc = loader.getController();
+        for(String m : receiver) {
+            a = m;
+        }
+        System.out.println(a);
+        cbc.LoadChat(currentUser.getEmail(), a, currentUser);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Fosbook");
+        stage.show();
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

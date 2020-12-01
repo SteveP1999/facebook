@@ -3,7 +3,7 @@ package sample;
 import java.util.ArrayList;
 
 public class Feed {
-    private ArrayList<String> post;
+    private ArrayList<String> post = new ArrayList<>();
 
     public ArrayList<String> getPost() {
         return post;

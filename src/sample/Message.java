@@ -4,36 +4,36 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
     User Sender;
-    User Reciever;
-    String Meassage;
+    User Receiver;
+    String Message;
 
-    public Message(User sender, User reciever, String meassage) {
+    public Message(User sender, User receiver, String message) {
         Sender = sender;
-        Reciever = reciever;
-        Meassage = meassage;
+        Receiver = receiver;
+        Message = message;
     }
 
     public User getSender() {
         return Sender;
     }
 
-    public User getReciever() {
-        return Reciever;
+    public User getReceiver() {
+        return Receiver;
     }
 
     public String getMeassage() {
-        return Meassage;
+        return Message;
     }
 
     public void setSender(User sender) {
         Sender = sender;
     }
 
-    public void setReciever(User reciever) {
-        Reciever = reciever;
+    public void setreceiver(User receiver) {
+        Receiver = receiver;
     }
 
     public void setMeassage(String meassage) {
-        Meassage = meassage;
+        Message = meassage;
     }
 }

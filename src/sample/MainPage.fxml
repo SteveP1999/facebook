@@ -43,9 +43,9 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
-            <ListView fx:id="Friends" prefHeight="534.0" prefWidth="100.0" />
-            <TextField fx:id="searchUsers" promptText="Search for friends" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Search" />
+            <ListView fx:id="Friends" prefHeight="509.0" prefWidth="126.0" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Follow" />
+            <Button mnemonicParsing="false" onAction="#HandleChatBoxClicked" prefHeight="60.0" prefWidth="126.0" text="Chat" />
          </children></VBox>
    </right>
    <left>
@@ -109,11 +109,8 @@
    <center>
       <AnchorPane prefHeight="548.0" prefWidth="671.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutY="1.0" prefHeight="534.0" prefWidth="671.0">
-               <children>
-                  <ListView fx:id="ChatBox" prefHeight="551.0" prefWidth="671.0" />
-               </children>
-            </VBox>
+            <TextField fx:id="Post" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="514.0" promptText="Write a post" />
+            <Button layoutX="557.0" layoutY="14.0" mnemonicParsing="false" onAction="#PostButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Post" />
          </children>
       </AnchorPane>
    </center>

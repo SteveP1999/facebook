@@ -7,7 +7,7 @@ public class Chat {
         File f = new File("chatstream.ser");
         if (f.exists()) {
             try {
-                AllMessages u = null;
+                AllMessages u;
                 FileInputStream fileIn = new FileInputStream("chatstream.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 u = (AllMessages) in.readObject();

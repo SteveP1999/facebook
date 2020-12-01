@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class RegisterSceneController {
     Functions func = new Functions();
+    AllUsers users = new AllUsers();
     @FXML
     TextField Email;
     @FXML
@@ -21,7 +22,7 @@ public class RegisterSceneController {
     TextField Password;
     @FXML
     TextField Age;
-    AllUsers users = new AllUsers();
+
 
     public void handleRegisterButton(ActionEvent actionEvent) throws IOException {
         this.users = new Database().ReadUsers();
