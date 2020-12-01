@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.xml.crypto.Data;
@@ -39,6 +40,15 @@ public class DataChangeController {
                     users.getUsers().get(i).setName(Username.getText());
                     new Database().SaveUsers(users);
                 }
+                else {
+                    FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("UsernameChange.fxml"));
+                    Parent popupRoot = popupLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(popupRoot));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Username error");
+                    stage.show();
+                }
             }
         }
     }
@@ -50,6 +60,15 @@ public class DataChangeController {
                     users.getUsers().get(i).setPassword(Password.getText());
                     new Database().SaveUsers(users);
                 }
+                else {
+                    FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("PasswordChange.fxml"));
+                    Parent popupRoot = popupLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(popupRoot));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Password error");
+                    stage.show();
+                }
             }
         }
     }
@@ -60,6 +79,15 @@ public class DataChangeController {
                 if (func.verifyAge(Age.getText())) {
                     users.getUsers().get(i).setAge(Integer.parseInt(Age.getText()));
                     new Database().SaveUsers(users);
+                }
+                else {
+                    FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("AgeChange.fxml"));
+                    Parent popupRoot = popupLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(popupRoot));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Age error");
+                    stage.show();
                 }
             }
         }
