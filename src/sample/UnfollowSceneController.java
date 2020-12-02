@@ -11,7 +11,7 @@ public class UnfollowSceneController {
     private Button YesButton;
     private User currentUser;
     private User followUser;
-    private final AllUsers users = new Database().ReadUsers();
+    private AllUsers users = new Database().ReadUsers();
 
     @FXML
     public void HandleNoButton() {
@@ -20,10 +20,15 @@ public class UnfollowSceneController {
     }
 
     public void HandleYesButton() {
-        getUserByEmail(currentUser.getEmail()).getFriends().remove(followUser);
+        currentUser.getFriends().remove(followUser);
+        getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(followUser.getEmail()));
         new Database().SaveUsers(users);
         Stage stage = (Stage) NoButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     public User getUserByEmail(String email) {
@@ -32,10 +37,6 @@ public class UnfollowSceneController {
                 return user;
         }
         return null;
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
     }
 
     public void setFollowUser(User followUser) {
