@@ -41,6 +41,7 @@ public class MainPageController implements Initializable {
 
     User currentUser = new User();
     ObservableList<String> list = FXCollections.observableArrayList();
+    ObservableList<String> list2 = FXCollections.observableArrayList();
     AllUsers users = new AllUsers();
 
     public void initData() {
@@ -59,16 +60,18 @@ public class MainPageController implements Initializable {
         Friends.getItems().addAll(list);
     }
 
-    public void loadData2(User usr) {
+    public void loadFeed(User usr) {
         setCurrentUser(usr);
-        list.removeAll();
+        list2.removeAll();
+        System.out.println(currentUser.getFriends().size());
         for(User friend : currentUser.getFriends()) {
+            //System.out.println(friend.getFeed().getPost().get(0));
             for(String s : friend.getFeed().getPost()) {
-                String pos = friend.getEmail() + s;
-                list.add(pos);
+                String pos = friend.getEmail() + ":   \t" + s;
+                list2.add(pos);
             }
         }
-        ChatBox.getItems().addAll(list);
+        ChatBox.getItems().addAll(list2);
     }
 
     public void setText(String text) {
@@ -103,12 +106,10 @@ public class MainPageController implements Initializable {
     }
 
     public void PostButtonClicked() {
-        System.out.println(currentUser.getEmail());
-        /*
-        currentUser.getFeed().AddFeed(Post.getText());
+        getUserByEmail(currentUser.getEmail()).getFeed().AddFeed(Post.getText());
         new Database().SaveUsers(users);
         System.out.println(currentUser.getFeed());
-        */
+
     }
 
     public void HandleChatBoxClicked() throws IOException {
@@ -160,12 +161,12 @@ public class MainPageController implements Initializable {
                 stage.setTitle("Unfollow");
                 stage.show();
             } else {
-                currentUser.AddFriend(getUserByEmail(a));
+                getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(a));
                 new Database().SaveUsers(users);
             }
         }
         else {
-            currentUser.AddFriend(getUserByEmail(a));
+            getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(a));
             new Database().SaveUsers(users);
         }
     }

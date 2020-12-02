@@ -44,7 +44,7 @@ public class MainMenuController implements Initializable {
             for (User user : users.getUsers()) {
                 if (user.getEmail().equals(Email.getText())) {
                     mpc.loadData(user);
-                    mpc.loadData2(user);
+                    mpc.loadFeed(user);
                     String username = user.getName();
                     String password = user.getPassword();
                     int age = user.getAge();
