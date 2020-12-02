@@ -139,28 +139,29 @@ public class MainPageController implements Initializable {
     public void HandleFollowButtonClicked() throws IOException {
         ObservableList<String> follow;
         follow = Friends.getSelectionModel().getSelectedItems();
-        String a = "";
-        for (String m : follow) {
-            a = m;
-        }
+        String a = follow.get(0);
         if (!currentUser.getFriends().isEmpty()) {
+            boolean shouldFollow = true;
             for (User user : currentUser.getFriends()) {
                 if (user.getEmail().equals(a)) {
-                    FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("UnfollowScene.fxml"));
-                    Parent popupRoot = popupLoader.load();
-                    UnfollowSceneController usc = popupLoader.getController();
-                    usc.setCurrentUser(currentUser);
-                    usc.setFollowUser(getUserByEmail(a));
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(popupRoot));
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setTitle("Unfollow");
-                    stage.show();
-                } else {
-                    System.out.println(currentUser.getFriends().get(0).getEmail());
-                    currentUser.AddFriend(getUserByEmail(a));
-                    new Database().SaveUsers(users);
+                    shouldFollow = false;
+                    break;
                 }
+            }
+            if (!shouldFollow) {
+                FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("UnfollowScene.fxml"));
+                Parent popupRoot = popupLoader.load();
+                UnfollowSceneController usc = popupLoader.getController();
+                usc.setCurrentUser(currentUser);
+                usc.setFollowUser(getUserByEmail(a));
+                Stage stage = new Stage();
+                stage.setScene(new Scene(popupRoot));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Unfollow");
+                stage.show();
+            } else {
+                currentUser.AddFriend(getUserByEmail(a));
+                new Database().SaveUsers(users);
             }
         }
         else {
