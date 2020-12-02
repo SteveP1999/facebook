@@ -53,7 +53,7 @@ public class MainMenuController implements Initializable {
                     stage.setScene(new Scene(root));
                     stage.setTitle("Fosbook");
                     stage.show();
-                    break; //TODO javítsd ki bazdmeg!
+                    break;
                 }
             }
         } else {

@@ -10,11 +10,7 @@ public class Feed implements Serializable {
     public ArrayList<String> getPost() {
         return post;
     }
-
-    public void setPost(ArrayList<String> post) {
-        this.post = post;
-    }
-
+    
     public void AddFeed(String feed) {
         post.add(feed);
     }

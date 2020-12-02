@@ -28,7 +28,6 @@ public class Chat {
             out.writeObject(users);
             out.close();
             fileOut.close();
-            System.out.println("Serialized data is saved");
         } catch (IOException i) {
             i.printStackTrace();
         }

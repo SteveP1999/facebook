@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
@@ -63,9 +61,7 @@ public class MainPageController implements Initializable {
     public void loadFeed(User usr) {
         setCurrentUser(usr);
         list2.removeAll();
-        System.out.println(currentUser.getFriends().size());
         for(User friend : currentUser.getFriends()) {
-            //System.out.println(friend.getFeed().getPost().get(0));
             for(String s : friend.getFeed().getPost()) {
                 String pos = friend.getEmail() + ":   \t" + s;
                 list2.add(pos);
@@ -108,8 +104,6 @@ public class MainPageController implements Initializable {
     public void PostButtonClicked() {
         getUserByEmail(currentUser.getEmail()).getFeed().AddFeed(Post.getText());
         new Database().SaveUsers(users);
-        System.out.println(currentUser.getFeed());
-
     }
 
     public void HandleChatBoxClicked() throws IOException {
