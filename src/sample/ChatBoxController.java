@@ -14,7 +14,7 @@ public class ChatBoxController implements Initializable {
     AllUsers users;
     User currentUser;
     User receiver;
-    AllMessages messages;
+    AllMessages messages = new Chat().ReadMessages();
     @FXML
     ListView<String> ChatWindow = new ListView<>();
     @FXML
@@ -30,13 +30,12 @@ public class ChatBoxController implements Initializable {
         setCurrentUser(usr);
         setReceiver(getUserByEmail(receiver));
         list.removeAll();
-        messages = new Chat().ReadMessages();
         for (Message msg : messages.getMessages()) {
-            if (msg.getSender().getEmail().equals(sender) || msg.getReceiver().getEmail().equals(receiver)) {
+            if (msg.getSender().getEmail().equals(sender) && msg.getReceiver().getEmail().equals(receiver)) {
                 String a = sender.length() < receiver.length() ? sender + ":\t" + nameDiff(sender, receiver) : sender + ":\t";
                 a += msg.getMeassage();
                 list.add(a);
-            } else if (msg.getSender().getEmail().equals(receiver) || msg.getReceiver().getEmail().equals(sender)) {
+            } else if (msg.getSender().getEmail().equals(receiver) && msg.getReceiver().getEmail().equals(sender)) {
                 String a = receiver.length() < sender.length() ? receiver + ":\t" + nameDiff(receiver, sender) : receiver + ":\t";
                 a += msg.getMeassage();
                 list.add(a);

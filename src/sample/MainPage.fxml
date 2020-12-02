@@ -44,7 +44,7 @@
                </font>
             </Label>
             <ListView fx:id="Friends" prefHeight="509.0" prefWidth="126.0" />
-            <Button mnemonicParsing="false" onAction="#HandleFollowbButtonClcked" prefHeight="26.0" prefWidth="130.0" text="Follow" />
+            <Button mnemonicParsing="false" onAction="#HandleFollowButtonClicked" prefHeight="26.0" prefWidth="130.0" text="Follow" />
             <Button mnemonicParsing="false" onAction="#HandleChatBoxClicked" prefHeight="60.0" prefWidth="126.0" text="Chat" />
          </children></VBox>
    </right>
@@ -111,6 +111,7 @@
          <children>
             <TextField fx:id="Post" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="514.0" promptText="Write a post" />
             <Button layoutX="557.0" layoutY="14.0" mnemonicParsing="false" onAction="#PostButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Post" />
+            <ListView fx:id="ChatBox" layoutY="49.0" prefHeight="487.0" prefWidth="674.0" />
          </children>
       </AnchorPane>
    </center>

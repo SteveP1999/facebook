@@ -39,8 +39,9 @@ public class Functions {
         AllUsers users = new Database().ReadUsers();
         for (int i = 0; i < users.getUsers().size(); i++) {
             if (users.getUsers().get(i).getEmail().equals(Email)) {
-                if (users.getUsers().get(i).getPassword().equals(Password))
+                if (users.getUsers().get(i).getPassword().equals(Password)) {
                     return true;
+                }
             }
         }
         return false;

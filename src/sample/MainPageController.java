@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,13 +31,9 @@ public class MainPageController implements Initializable {
     @FXML
     Label Age = new Label();
     @FXML
-    Label Timer = new Label();
-    @FXML
     ListView<String> Friends = new ListView<>();
     @FXML
     ListView<String> ChatBox = new ListView<>();
-    @FXML
-    TextField searchFriends = new TextField();
     @FXML
     TextField Post = new TextField();
     @FXML
@@ -54,10 +51,24 @@ public class MainPageController implements Initializable {
         setCurrentUser(usr);
         list.removeAll();
         for (User friend : users.getUsers()) {
-            String a = friend.getEmail();
-            list.add(a);
+            if (!friend.getEmail().equals(currentUser.getEmail())) {
+                String a = friend.getEmail();
+                list.add(a);
+            }
         }
         Friends.getItems().addAll(list);
+    }
+
+    public void loadData2(User usr) {
+        setCurrentUser(usr);
+        list.removeAll();
+        for(User friend : currentUser.getFriends()) {
+            for(String s : friend.getFeed().getPost()) {
+                String pos = friend.getEmail() + s;
+                list.add(pos);
+            }
+        }
+        ChatBox.getItems().addAll(list);
     }
 
     public void setText(String text) {
@@ -72,38 +83,6 @@ public class MainPageController implements Initializable {
 
     public void closeApp() {
         System.exit(0);
-    }
-
-    /*public void clock() throws InterruptedException {
-        Thread clock = new Thread();
-        {
-            try {
-                while (true) {
-                    Calendar calendar = new GregorianCalendar();
-                    int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    int month = calendar.get(Calendar.MONTH);
-                    int year = calendar.get(Calendar.YEAR);
-                    int second = calendar.get(Calendar.SECOND);
-                    int minute = calendar.get(Calendar.MINUTE);
-                    int hour = calendar.get(Calendar.HOUR);
-                    Timer.setText("Time:" + hour + minute + second + "Date" + year + "/" + month + "/" + day);
-                    clock.sleep(1000);
-                }
-            } catch (InterruptedException e) {
-                System.out.println("Hiba");
-            }
-        }
-        clock.start();
-    }*/
-
-    public ArrayList<User> searchUsers() {
-        ArrayList<User> results = new ArrayList<>();
-        for (User user : users.getUsers()) {
-            if (user.getName().contains(searchFriends.getText())) {
-                results.add(user);
-            }
-        }
-        return results;
     }
 
     public void HandleDataChangeClicked() throws IOException {
@@ -139,7 +118,7 @@ public class MainPageController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ChatBox.fxml"));
         Parent root = loader.load();
         ChatBoxController cbc = loader.getController();
-        for(String m : receiver) {
+        for (String m : receiver) {
             a = m;
         }
         cbc.LoadChat(currentUser.getEmail(), a, currentUser);
@@ -157,14 +136,37 @@ public class MainPageController implements Initializable {
         return null;
     }
 
-    public void HandleFollowbButtonClcked() {
+    public void HandleFollowButtonClicked() throws IOException {
         ObservableList<String> follow;
         follow = Friends.getSelectionModel().getSelectedItems();
         String a = "";
-        for(String m : follow) {
+        for (String m : follow) {
             a = m;
         }
-        currentUser.AddFriend(getUserByEmail(a));
+        if (!currentUser.getFriends().isEmpty()) {
+            for (User user : currentUser.getFriends()) {
+                if (user.getEmail().equals(a)) {
+                    FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("UnfollowScene.fxml"));
+                    Parent popupRoot = popupLoader.load();
+                    UnfollowSceneController usc = popupLoader.getController();
+                    usc.setCurrentUser(currentUser);
+                    usc.setFollowUser(getUserByEmail(a));
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(popupRoot));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Unfollow");
+                    stage.show();
+                } else {
+                    System.out.println(currentUser.getFriends().get(0).getEmail());
+                    currentUser.AddFriend(getUserByEmail(a));
+                    new Database().SaveUsers(users);
+                }
+            }
+        }
+        else {
+            currentUser.AddFriend(getUserByEmail(a));
+            new Database().SaveUsers(users);
+        }
     }
 
     @Override
