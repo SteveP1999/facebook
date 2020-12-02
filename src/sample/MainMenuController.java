@@ -35,6 +35,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void handleButtonAction2() throws IOException {
+        this.users = new Database().ReadUsers();
         if (func.EnteringPossible(Email.getText(), Password.getText())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
             Parent root = loader.load();
@@ -67,6 +68,6 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.users = new Database().ReadUsers();
+        //this.users = new Database().ReadUsers();
     }
 }

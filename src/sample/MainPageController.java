@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -37,7 +38,9 @@ public class MainPageController implements Initializable {
     @FXML
     TextField searchFriends = new TextField();
     @FXML
-    TextField Post;
+    TextField Post = new TextField();
+    @FXML
+    MenuItem Exit = new MenuItem();
 
     User currentUser = new User();
     ObservableList<String> list = FXCollections.observableArrayList();
@@ -65,6 +68,10 @@ public class MainPageController implements Initializable {
         Username.setText(name);
         Password.setText(password);
         Age.setText(age);
+    }
+
+    public void closeApp() {
+        System.exit(0);
     }
 
     /*public void clock() throws InterruptedException {

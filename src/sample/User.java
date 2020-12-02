@@ -30,7 +30,7 @@ public class User implements Serializable {
 
     public User() {
         Name = "default";
-        Email = "default";
+        Email = "default@default.hu";
         Password = "default";
         Age = 10;
         Friends = new ArrayList<>();

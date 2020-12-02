@@ -22,6 +22,7 @@ public class Database {
     }
 
     public void SaveUsers(AllUsers users) {
+
         try {
             FileOutputStream fileOut = new FileOutputStream("database.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
