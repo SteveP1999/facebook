@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Az osztály a kezdőoldalon található dolgokat valósítja meg, bejeltnkezés, regisztráció, e-mail jelszó beírása
+ */
 
 public class MainMenuController implements Initializable {
     @FXML
@@ -25,6 +28,10 @@ public class MainMenuController implements Initializable {
     Functions func = new Functions();
     AllUsers users = new AllUsers();
 
+    /**
+     * A függvény betölti a regisztrációs oldalt
+     */
+
     public void handleButtonAction(ActionEvent actionEvent) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("RegisterScene.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
@@ -32,6 +39,10 @@ public class MainMenuController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
+
+    /**
+     * A függvény betölti a felhasználói oldalt amennyiben helyesek a megadott adatok, ha nem akkor hiba oldalra visz
+     */
 
     @FXML
     public void handleButtonAction2() throws IOException {

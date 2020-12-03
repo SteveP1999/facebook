@@ -2,7 +2,16 @@ package sample;
 
 import java.io.*;
 
+/**
+ * Az osztály megvalósítja a felhasználóink mentését egy database.ser serializált fájlba továbbá a beolvasást is megvalósítja
+ */
+
 public class Database {
+
+    /**
+     * A függvény beolvassa database.ser serializált fájl tartalmát egy Allusers típusú változóba majd visszaadja
+     */
+
     public AllUsers ReadUsers() {
         File f = new File("database.ser");
         if (f.exists()) {
@@ -21,8 +30,11 @@ public class Database {
         return new AllUsers();
     }
 
-    public void SaveUsers(AllUsers users) {
+    /**
+     * A függvény elmenti egy Allusers osztály összes felhasználóját egy database.ser serializált fájlba
+     */
 
+    public void SaveUsers(AllUsers users) {
         try {
             FileOutputStream fileOut = new FileOutputStream("database.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);

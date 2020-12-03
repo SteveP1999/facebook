@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Az osztály a bejelentkezett oldalon lévő dolgoakt valósítja meg, követés üzenetek írása, adatmegváltoztatás és még sok minden
+ */
+
 public class MainPageController implements Initializable {
 
     @FXML
@@ -41,7 +45,11 @@ public class MainPageController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
     ObservableList<String> list2 = FXCollections.observableArrayList();
     AllUsers users = new AllUsers();
-    
+
+    /**
+     * A függvény betölti egy listviewba az összes felhasználót akik regisztráltak az oldalra
+     */
+
     public void loadData(User usr) {
         setCurrentUser(usr);
         list.removeAll();
@@ -53,6 +61,10 @@ public class MainPageController implements Initializable {
         }
         Friends.getItems().addAll(list);
     }
+
+    /**
+     * A függvény betölti az összes követett felhasználó feedjét egy listviewba
+     */
 
     public void loadFeed(User usr) {
         setCurrentUser(usr);
@@ -66,9 +78,17 @@ public class MainPageController implements Initializable {
         ChatBox.getItems().addAll(list2);
     }
 
+    /**
+     * A függvény beállítja egy text értékét.
+     */
+
     public void setText(String text) {
         UserLoggedIn.setText(text);
     }
+
+    /**
+     * A függvény beállítja a bejelentkezett user nevét kódját és korát 3 különböző textbe
+     */
 
     public void setUserInformation(String name, String password, String age) {
         Username.setText(name);
@@ -76,9 +96,17 @@ public class MainPageController implements Initializable {
         Age.setText(age);
     }
 
+    /**
+     * A függvény bezárja a programot
+     */
+
     public void closeApp() {
         System.exit(0);
     }
+
+    /**
+     * A függvény betölti az adatok megváltozatásához szükséges oldalt ha egy gombra kattintunk
+     */
 
     public void HandleDataChangeClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DataChange.fxml"));
@@ -93,14 +121,26 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
+    /**
+     * A függvény beállítja az éppen bejelentkezett felhasználót a currenUser változóba
+     */
+
     public void setCurrentUser(User user) {
         currentUser = user;
     }
+
+    /**
+     * A függvény felvesz egy postot az összes post listájába
+     */
 
     public void PostButtonClicked() {
         getUserByEmail(currentUser.getEmail()).getFeed().AddFeed(Post.getText());
         new Database().SaveUsers(users);
     }
+
+    /**
+     * A függvény megnyitja a chat ablakot azzal a személlyel aki ki lett választva és betölti az üzeneteiket
+     */
 
     public void HandleChatBoxClicked() throws IOException {
         ObservableList<String> receiver;
@@ -119,6 +159,10 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
+    /**
+     * A függvény visszaad egy felhasználót User típust egy string alapján(e-mail)
+     */
+
     public User getUserByEmail(String email) {
         for (User user : users.getUsers()) {
             if (user.getEmail().equals(email))
@@ -126,6 +170,10 @@ public class MainPageController implements Initializable {
         }
         return null;
     }
+
+    /**
+     * A függvény beköveti a listviewben kiválasztott felhasználót, amennyiben már követi feldob egy oldalt hogy ki akarja e követni
+     */
 
     public void HandleFollowButtonClicked() throws IOException {
         ObservableList<String> follow;
@@ -163,6 +211,10 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * A függvény kijelentkezik, bezárja az oldalt és megnyitja a kezdőoldalt
+     */
+
     public void LogOut() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
@@ -171,6 +223,10 @@ public class MainPageController implements Initializable {
         stage.setTitle("Fosbook");
         stage.show();
     }
+
+    /**
+     * A függvény betölti a Help oldalt ahol pár hasznos tipp van
+     */
 
     public void Help() throws IOException {
         FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("HelpScene.fxml"));

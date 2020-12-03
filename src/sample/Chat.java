@@ -2,7 +2,16 @@ package sample;
 
 import java.io.*;
 
+/**
+ * Az osztály az üzenetek lementését valósítja meg továbbá a visszaolvasást a serializált fájlból
+ */
+
 public class Chat {
+
+    /**
+     * A függvény beolvasssa a chatstream.ser serializált fájlból egy array listbe ami messagekat tárol és ezt visszaadja
+     */
+
     public AllMessages ReadMessages() {
         File f = new File("chatstream.ser");
         if (f.exists()) {
@@ -20,6 +29,10 @@ public class Chat {
         }
         return new AllMessages();
     }
+
+    /**
+     * A függvény elmenti a chatstream.ser serializált fájlba egy array list tartalmát amiben messageket tárolunk
+     */
 
     public void SaveMessages(AllMessages users) {
         try {

@@ -14,6 +14,10 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * A függvény betölti a kezdőoldalt nem átméretezhetővé teszi ad neki egy nevet.
+     */
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         pStage = primaryStage;
@@ -23,6 +27,10 @@ public class Main extends Application {
         pStage.setResizable(false);
         pStage.show();
     }
+
+    /**
+     * A függvény visszaadj a primary staget
+     */
 
     public static Stage getpStage() {
         return pStage;

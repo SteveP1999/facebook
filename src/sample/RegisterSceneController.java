@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Az osztály a regisztrációs oldalon található dolgokat valósítja meg
+ */
+
 public class RegisterSceneController {
     Functions func = new Functions();
     AllUsers users = new AllUsers();
@@ -24,6 +28,10 @@ public class RegisterSceneController {
     @FXML
     TextField Age;
 
+    /**
+     * A ellenőrzi, hogy helyeseke-e a meadott regisztrációs adatok, amennyiben igen regisztrálja a felhasználót
+     * és visszaviszi a bejelntkezési oldalra, ha nem akkor hibaoldalt dob fel
+     */
 
     public void handleRegisterButton(ActionEvent actionEvent) throws IOException {
         this.users = new Database().ReadUsers();
@@ -48,6 +56,10 @@ public class RegisterSceneController {
             stage.show();
         }
     }
+
+    /**
+     * A függvény visszavisza  bejelentkezési oldalra
+     */
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));

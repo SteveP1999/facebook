@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Az osztály az adatváltoztatást valósítja meg
+ */
+
 public class DataChangeController {
     @FXML
     TextField Username = new TextField();
@@ -24,13 +28,25 @@ public class DataChangeController {
     AllUsers users = new AllUsers();
     User CurrentUser = new User();
 
+    /**
+     * A függvény beállítja az éppen bejeltnkezett felhasználót
+     */
+
     public void SetCurrentUser(User usr) {
         CurrentUser = usr;
     }
 
+    /**
+     * A függvény beállítja a bejelentkezett felhasználó e-mail címét
+     */
+
     public void ChangeLogger(String email) {
         logger = email;
     }
+
+    /**
+     * A függvény átállítja a felhasználó felhasználónevét amennyiben hibás az adat megnyitja az ehhez tartozó error oldalt
+     */
 
     public void ChangeUsername() throws IOException {
         for (int i = 0; i < users.getUsers().size(); i++) {
@@ -52,6 +68,10 @@ public class DataChangeController {
         }
     }
 
+    /**
+     * A függvény átállítja a felhasználó jelszavát amennyiben hibás az adat megnyitja az ehhez tartozó error oldalt
+     */
+
     public void ChangePassword() throws IOException {
         for (int i = 0; i < users.getUsers().size(); i++) {
             if (users.getUsers().get(i).getEmail().equals(logger)) {
@@ -71,6 +91,10 @@ public class DataChangeController {
             }
         }
     }
+
+    /**
+     * A függvény átállítja a felhasználó életkorát amennyiben hibás az adat megnyitja az ehhez tartozó error oldalt
+     */
 
     public void ChangeAge() throws IOException {
         for (int i = 0; i < users.getUsers().size(); i++) {
@@ -92,9 +116,17 @@ public class DataChangeController {
         }
     }
 
+    /**
+     * A függvény beállítja az users változó értékét
+     */
+
     public void ChangeAllUsers(AllUsers users) {
         this.users = users;
     }
+
+    /**
+     * A függvény visszalép az oldalra ahonnan jöttünk és bezárja azt amint vagyunk
+     */
 
     public void GoBack() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
