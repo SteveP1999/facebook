@@ -24,16 +24,4 @@ public class Message implements Serializable {
     public String getMeassage() {
         return Message;
     }
-
-    public void setSender(User sender) {
-        Sender = sender;
-    }
-
-    public void setreceiver(User receiver) {
-        Receiver = receiver;
-    }
-
-    public void setMeassage(String meassage) {
-        Message = meassage;
-    }
 }

@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
@@ -59,7 +57,6 @@ public class MainPageController implements Initializable {
     public void loadFeed(User usr) {
         setCurrentUser(usr);
         list2.removeAll();
-        System.out.println(currentUser.getFriends().size());
         for(User friend : currentUser.getFriends()) {
             for(String s : friend.getFeed().getPost()) {
                 String pos = friend.getEmail() + ":   \t" + s;
@@ -164,6 +161,25 @@ public class MainPageController implements Initializable {
             getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(a));
             new Database().SaveUsers(users);
         }
+    }
+
+    public void LogOut() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        Parent root = loader.load();
+        Stage stage = Main.getpStage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Fosbook");
+        stage.show();
+    }
+
+    public void Help() throws IOException {
+        FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("HelpScene.fxml"));
+        Parent popupRoot = popupLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(popupRoot));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Help");
+        stage.show();
     }
 
     @Override

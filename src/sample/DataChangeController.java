@@ -20,7 +20,7 @@ public class DataChangeController {
     TextField Age = new TextField();
 
     Functions func = new Functions();
-    String logger = new String();
+    String logger;
     AllUsers users = new AllUsers();
     User CurrentUser = new User();
 

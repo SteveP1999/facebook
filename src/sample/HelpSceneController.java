@@ -4,8 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class AlertBoxForLoggingInController {
-
+public class HelpSceneController {
     @FXML
     private Button GoBackButton;
 

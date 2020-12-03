@@ -7,8 +7,6 @@ import javafx.stage.Stage;
 public class UnfollowSceneController {
     @FXML
     private Button NoButton;
-    @FXML
-    private Button YesButton;
     private User currentUser;
     private User followUser;
     private AllUsers users = new Database().ReadUsers();

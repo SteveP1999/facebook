@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    AllUsers users = new AllUsers();
     private static Stage pStage;
 
     public static void main(String[] args) {

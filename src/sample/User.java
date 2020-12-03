@@ -15,10 +15,6 @@ public class User implements Serializable {
         return feed;
     }
 
-    public void setFeed(Feed feed) {
-        this.feed = feed;
-    }
-
     public User(String name, String email, String password, int age) {
         Name = name;
         Email = email;
@@ -62,10 +58,6 @@ public class User implements Serializable {
         Name = name;
     }
 
-    public void setEmail(String email) {
-        Email = email;
-    }
-
     public void setPassword(String password) {
         Password = password;
     }
@@ -74,13 +66,7 @@ public class User implements Serializable {
         Age = age;
     }
 
-    public void setFriends(ArrayList<User> friends) {
-        Friends = friends;
-    }
-
     public void AddFriend(User user) {
         Friends.add(user);
     }
-
-    public void RemoveFriend(User user) { Friends.remove(user); }
 }
