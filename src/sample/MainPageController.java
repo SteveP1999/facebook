@@ -68,14 +68,16 @@ public class MainPageController implements Initializable {
 
     public void loadFeed(User usr) {
         setCurrentUser(usr);
-        ChatBox.getItems().removeAll(list2);
-        list2.removeAll();
-        for(User friend : currentUser.getFriends()) {
-            for(String s : friend.getFeed().getPost()) {
+        list2.clear();
+        list2.addAll(getUserByEmail(currentUser.getEmail()).getFeed().getPost());
+
+        for (User friend : getUserByEmail(currentUser.getEmail()).getFriends()) {
+            for (String s : friend.getFeed().getPost()) {
                 String pos = friend.getEmail() + ":   \t" + s;
                 list2.add(pos);
             }
         }
+
         ChatBox.getItems().addAll(list2);
     }
 
@@ -135,8 +137,20 @@ public class MainPageController implements Initializable {
      */
 
     public void PostButtonClicked() {
+
         getUserByEmail(currentUser.getEmail()).getFeed().AddFeed(Post.getText());
         new Database().SaveUsers(users);
+
+        System.out.println(currentUser.getFeed().getPost().size());
+
+        int j = ChatBox.getItems().size();
+        int k = 0;
+        for (int i = 0; i < j; i++) {
+            ChatBox.getItems().remove(i - k);
+            k = k + 1;
+        }
+
+        loadFeed(currentUser);
     }
 
     /**
@@ -147,17 +161,19 @@ public class MainPageController implements Initializable {
         ObservableList<String> receiver;
         receiver = Friends.getSelectionModel().getSelectedItems();
         String a = "";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChatBox.fxml"));
-        Parent root = loader.load();
-        ChatBoxController cbc = loader.getController();
         for (String m : receiver) {
             a = m;
         }
-        cbc.LoadChat(currentUser.getEmail(), a);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Fosbook");
-        stage.show();
+        if (!a.equals("")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ChatBox.fxml"));
+            Parent root = loader.load();
+            ChatBoxController cbc = loader.getController();
+            cbc.LoadChat(currentUser.getEmail(), a);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Fosbook");
+            stage.show();
+        }
     }
 
     /**
@@ -207,16 +223,13 @@ public class MainPageController implements Initializable {
                 setAllusers(users);
                 setCurrentUser(currentUser);
             }
-        }
-        else {
+        } else {
             currentUser.AddFriend(getUserByEmail(a));
             getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(a));
             new Database().SaveUsers(users);
             setAllusers(users);
             setCurrentUser(currentUser);
-            for(User user : currentUser.getFriends()) {
-                System.out.println(user.getEmail());
-            }
+
         }
     }
 
@@ -251,11 +264,6 @@ public class MainPageController implements Initializable {
         this.users = users;
     }
 
-    public void test() {
-        //System.out.println(currentUser.getFriends().get(0));
-        System.out.println(getUserByEmail(currentUser.getEmail()).getFriends().get(0).getEmail());
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.users = new Database().ReadUsers();

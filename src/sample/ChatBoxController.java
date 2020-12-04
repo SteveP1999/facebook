@@ -45,24 +45,23 @@ public class ChatBoxController implements Initializable {
      */
 
     public void LoadChat(String currentUser, String receiver) {
-            messages = new Chat().ReadMessages();
-            setCurrentUser(getUserByEmail(currentUser));
-            setReceiver(getUserByEmail(receiver));
-            list.clear();
-            for (Message msg : messages.getMessages()) {
-                if (msg.getSender().getEmail().equals(currentUser) && msg.getReceiver().getEmail().equals(receiver)) {
-                    String a = currentUser.length() < receiver.length() ? currentUser + ":\t" + nameDiff(currentUser, receiver) : currentUser + ":\t";
-                    a += msg.getMeassage();
-                    list.add(a);
-                } else if (msg.getSender().getEmail().equals(receiver) && msg.getReceiver().getEmail().equals(currentUser)) {
-                    String a = receiver.length() < currentUser.length() ? receiver + ":\t" + nameDiff(receiver, currentUser) : receiver + ":\t";
-                    a += msg.getMeassage();
-                    list.add(a);
-                }
+        messages = new Chat().ReadMessages();
+        setCurrentUser(getUserByEmail(currentUser));
+        setReceiver(getUserByEmail(receiver));
+        list.clear();
+        for (Message msg : messages.getMessages()) {
+            if (msg.getSender().getEmail().equals(currentUser) && msg.getReceiver().getEmail().equals(receiver)) {
+                String a = currentUser.length() < receiver.length() ? currentUser + ":\t" + nameDiff(currentUser, receiver) : currentUser + ":\t";
+                a += msg.getMeassage();
+                list.add(a);
+            } else if (msg.getSender().getEmail().equals(receiver) && msg.getReceiver().getEmail().equals(currentUser)) {
+                String a = receiver.length() < currentUser.length() ? receiver + ":\t" + nameDiff(receiver, currentUser) : receiver + ":\t";
+                a += msg.getMeassage();
+                list.add(a);
             }
-            ChatWindow.getItems().addAll(list);
+        }
+        ChatWindow.getItems().addAll(list);
     }
-
 
 
     /**
@@ -90,17 +89,14 @@ public class ChatBoxController implements Initializable {
      */
 
     public void HandleMessageSent() {
-        Message mess = new Message(currentUser, receiver, msg.getText());
-        messages.addMessage(mess);
+        messages.addMessage(new Message(currentUser, receiver, msg.getText()));
         new Chat().SaveMessages(messages);
-
-        System.out.println(messages.getMessages().size());
 
         int j = ChatWindow.getItems().size();
         int k = 0;
-        for(int i=0; i<j;i++) {
-            ChatWindow.getItems().remove(i-k);
-            k=k+1;
+        for (int i = 0; i < j; i++) {
+            ChatWindow.getItems().remove(i - k);
+            k = k + 1;
         }
 
         LoadChat(currentUser.getEmail(), receiver.getEmail());
