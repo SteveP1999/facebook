@@ -13,7 +13,7 @@ public class AllMessages implements Serializable {
      * A tárolónk az üzeneteknek
      */
 
-    private ArrayList<Message> messages;
+    private final ArrayList<Message> messages;
 
     /**
      * Konstruktor az  osztályhoz

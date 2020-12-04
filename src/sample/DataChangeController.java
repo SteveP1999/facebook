@@ -23,7 +23,7 @@ public class DataChangeController {
     @FXML
     TextField Age = new TextField();
 
-    Functions func = new Functions();
+    final Functions func = new Functions();
     String logger;
     AllUsers users = new AllUsers();
     User CurrentUser = new User();

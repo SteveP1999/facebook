@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Feed implements Serializable {
 
-    private ArrayList<String> post = new ArrayList<>();
+    private final ArrayList<String> post = new ArrayList<>();
 
     /**
      * A függvény visszaadja a tárolót

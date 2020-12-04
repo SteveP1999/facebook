@@ -6,7 +6,7 @@ import sample.Functions;
 import static org.junit.Assert.*;
 
 public class FunctionsTest {
-    Functions func = new Functions();
+    final Functions func = new Functions();
 
     @Test
     public void verifyEmail() {

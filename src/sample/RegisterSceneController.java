@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 
 public class RegisterSceneController {
-    Functions func = new Functions();
+    final Functions func = new Functions();
     AllUsers users = new AllUsers();
     @FXML
     TextField Email;

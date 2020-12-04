@@ -13,7 +13,7 @@ public class AllUsers implements Serializable {
      * A listában tároljuk a felhasználókat (User)
      */
 
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     /**
      * Konstruktor

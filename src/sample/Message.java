@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 
 public class Message implements Serializable {
-    User Sender;
-    User Receiver;
-    String Message;
+    final User Sender;
+    final User Receiver;
+    final String Message;
 
     /**
      * Az osztály konstruktora

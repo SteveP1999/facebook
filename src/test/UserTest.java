@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {
 
-    User user = new User("Bence", "halabe@freemail.hu", "asdqwe", 13);
+    final User user = new User("Bence", "halabe@freemail.hu", "asdqwe", 13);
 
     @Test
     public void getName() {

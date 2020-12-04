@@ -42,8 +42,8 @@ public class MainPageController implements Initializable {
     MenuItem Exit = new MenuItem();
 
     User currentUser = new User();
-    ObservableList<String> list = FXCollections.observableArrayList();
-    ObservableList<String> list2 = FXCollections.observableArrayList();
+    final ObservableList<String> list = FXCollections.observableArrayList();
+    final ObservableList<String> list2 = FXCollections.observableArrayList();
     AllUsers users = new AllUsers();
 
     /**

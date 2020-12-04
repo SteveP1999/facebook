@@ -19,7 +19,7 @@ public class UnfollowSceneController {
     private Button NoButton;
     private User currentUser;
     private User followUser;
-    private AllUsers users = new Database().ReadUsers();
+    private final AllUsers users = new Database().ReadUsers();
 
     /**
      * A függvény bezárja az oldalt

@@ -31,12 +31,7 @@ public class Functions {
      */
 
     public boolean verifyAge(String Age) {
-        try {
-            Integer.parseInt(Age);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return Age.matches("-?(0|[1-9]\\d*)");
     }
 
     /**

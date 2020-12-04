@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public class User implements Serializable {
     private String Name;
-    private String Email;
+    private final String Email;
     private String Password;
     private int Age;
-    private ArrayList<User> Friends;
-    private Feed feed;
+    private final ArrayList<User> Friends;
+    private final Feed feed;
 
     /**
      * A függvény visszaadja, a felhasználó teljes feedjét

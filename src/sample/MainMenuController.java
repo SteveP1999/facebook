@@ -25,7 +25,7 @@ public class MainMenuController implements Initializable {
     @FXML
     TextField Password;
 
-    Functions func = new Functions();
+    final Functions func = new Functions();
     AllUsers users = new AllUsers();
 
     /**

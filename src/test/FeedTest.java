@@ -7,8 +7,8 @@ import static org.junit.Assert.assertEquals;
 
 public class FeedTest {
 
-    Feed feed = new Feed();
-    String str = "lali";
+    final Feed feed = new Feed();
+    final String str = "lali";
 
     @Test
     public void addFeed() {

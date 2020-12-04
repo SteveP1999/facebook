@@ -29,7 +29,7 @@ public class ChatBoxController implements Initializable {
     @FXML
     TextField msg = new TextField();
 
-    ObservableList<String> list = FXCollections.observableArrayList();
+    final ObservableList<String> list = FXCollections.observableArrayList();
 
 
     /**
