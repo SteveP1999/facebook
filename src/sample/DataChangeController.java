@@ -54,6 +54,8 @@ public class DataChangeController {
                 if (func.verifyName(Username.getText())) {
                     users.getUsers().get(i).setName(Username.getText());
                     new Database().SaveUsers(users);
+                    Stage stage = (Stage) Username.getScene().getWindow();
+                    stage.close();
                 }
                 else {
                     FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("UsernameChange.fxml"));
@@ -78,6 +80,8 @@ public class DataChangeController {
                 if (!Password.getText().equals("")) {
                     users.getUsers().get(i).setPassword(Password.getText());
                     new Database().SaveUsers(users);
+                    Stage stage = (Stage) Username.getScene().getWindow();
+                    stage.close();
                 }
                 else {
                     FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("PasswordChange.fxml"));
@@ -102,6 +106,8 @@ public class DataChangeController {
                 if (func.verifyAge(Age.getText())) {
                     users.getUsers().get(i).setAge(Integer.parseInt(Age.getText()));
                     new Database().SaveUsers(users);
+                    Stage stage = (Stage) Username.getScene().getWindow();
+                    stage.close();
                 }
                 else {
                     FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("AgeChange.fxml"));

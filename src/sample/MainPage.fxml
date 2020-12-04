@@ -73,6 +73,7 @@
                   <Label fx:id="Password" alignment="BOTTOM_CENTER" layoutX="-2.0" layoutY="109.0" prefHeight="18.0" prefWidth="102.0" text="Label" />
                   <Label fx:id="Age" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="167.0" prefHeight="18.0" prefWidth="103.0" text="Label" />
                   <Button layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#HandleDataChangeClicked" text="ChangeData" />
+                  <Button layoutX="25.0" layoutY="301.0" mnemonicParsing="false" onAction="#test" text="Button" />
                </children>
             </AnchorPane>
          </children></VBox>

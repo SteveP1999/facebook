@@ -121,4 +121,8 @@ public class User implements Serializable {
     public void AddFriend(User user) {
         Friends.add(user);
     }
+
+    public void RemoveFriend(User user) {
+        Friends.remove(user);
+    }
 }

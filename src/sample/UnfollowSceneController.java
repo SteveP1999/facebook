@@ -1,8 +1,14 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Az osztály a kikövetési oldalon található funkciókat valósítja meg
@@ -29,10 +35,16 @@ public class UnfollowSceneController {
      * A függvény bezárja az oldalt és kiköveti az adott felhasználót
      */
 
-    public void HandleYesButton() {
+    public void HandleYesButton() throws IOException {
         currentUser.getFriends().remove(followUser);
-        getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(followUser.getEmail()));
+        getUserByEmail(currentUser.getEmail()).RemoveFriend((getUserByEmail(followUser.getEmail())));
+
         new Database().SaveUsers(users);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+        Parent root = loader.load();
+        MainPageController mpc = loader.getController();
+        mpc.setAllusers(new Database().ReadUsers());
+        mpc.setCurrentUser(currentUser);
         Stage stage = (Stage) NoButton.getScene().getWindow();
         stage.close();
     }

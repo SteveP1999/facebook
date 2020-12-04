@@ -31,6 +31,7 @@ public class ChatBoxController implements Initializable {
 
     ObservableList<String> list = FXCollections.observableArrayList();
 
+
     /**
      * A függvény beállítja, hogy melyik felhasználó van éppen bejelentkezve
      */
@@ -44,22 +45,31 @@ public class ChatBoxController implements Initializable {
      */
 
     public void LoadChat(String sender, String receiver, User usr) {
-        setCurrentUser(usr);
-        setReceiver(getUserByEmail(receiver));
-        list.removeAll();
-        for (Message msg : messages.getMessages()) {
-            if (msg.getSender().getEmail().equals(sender) && msg.getReceiver().getEmail().equals(receiver)) {
-                String a = sender.length() < receiver.length() ? sender + ":\t" + nameDiff(sender, receiver) : sender + ":\t";
-                a += msg.getMeassage();
-                list.add(a);
-            } else if (msg.getSender().getEmail().equals(receiver) && msg.getReceiver().getEmail().equals(sender)) {
-                String a = receiver.length() < sender.length() ? receiver + ":\t" + nameDiff(receiver, sender) : receiver + ":\t";
-                a += msg.getMeassage();
-                list.add(a);
-            }
+        int j = ChatWindow.getItems().size();
+        int k = 0;
+        for(int i=0; i<j;i++) {
+            ChatWindow.getItems().remove(i-k);
+            k=k+1;
         }
-        ChatWindow.getItems().addAll(list);
+            messages = new Chat().ReadMessages();
+            setCurrentUser(usr);
+            setReceiver(getUserByEmail(receiver));
+            list.removeAll();
+            for (Message msg : messages.getMessages()) {
+                if (msg.getSender().getEmail().equals(sender) && msg.getReceiver().getEmail().equals(receiver)) {
+                    String a = sender.length() < receiver.length() ? sender + ":\t" + nameDiff(sender, receiver) : sender + ":\t";
+                    a += msg.getMeassage();
+                    list.add(a);
+                } else if (msg.getSender().getEmail().equals(receiver) && msg.getReceiver().getEmail().equals(sender)) {
+                    String a = receiver.length() < sender.length() ? receiver + ":\t" + nameDiff(receiver, sender) : receiver + ":\t";
+                    a += msg.getMeassage();
+                    list.add(a);
+                }
+            }
+            ChatWindow.getItems().addAll(list);
     }
+
+
 
     /**
      * A függvény két string hosszának különbségéből csinál egy azonos hosszúságú stringet és ezt adja vissza
@@ -89,6 +99,15 @@ public class ChatBoxController implements Initializable {
         Message mess = new Message(currentUser, receiver, msg.getText());
         messages.addMessage(mess);
         new Chat().SaveMessages(messages);
+        System.out.println(ChatWindow.getItems().size());
+        int j = ChatWindow.getItems().size();
+        int k = 0;
+        for(int i=0; i<j;i++) {
+            ChatWindow.getItems().remove(i-k);
+            k=k+1;
+        }
+
+        //LoadChat(currentUser.getEmail(), receiver.getEmail(), currentUser);
     }
 
     /**

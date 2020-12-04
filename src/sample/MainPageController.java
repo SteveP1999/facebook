@@ -68,6 +68,7 @@ public class MainPageController implements Initializable {
 
     public void loadFeed(User usr) {
         setCurrentUser(usr);
+        ChatBox.getItems().removeAll(list2);
         list2.removeAll();
         for(User friend : currentUser.getFriends()) {
             for(String s : friend.getFeed().getPost()) {
@@ -194,20 +195,28 @@ public class MainPageController implements Initializable {
                 usc.setCurrentUser(currentUser);
                 usc.setFollowUser(getUserByEmail(a));
                 Stage stage = new Stage();
-                stage.setScene(new Scene(popupRoot));
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(popupRoot));
                 stage.setTitle("Unfollow");
                 stage.show();
             } else {
                 currentUser.AddFriend(getUserByEmail(a));
                 getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(a));
                 new Database().SaveUsers(users);
+                loadFeed(currentUser);
+                setAllusers(users);
+                setCurrentUser(currentUser);
             }
         }
         else {
             currentUser.AddFriend(getUserByEmail(a));
             getUserByEmail(currentUser.getEmail()).AddFriend(getUserByEmail(a));
             new Database().SaveUsers(users);
+            setAllusers(users);
+            setCurrentUser(currentUser);
+            for(User user : currentUser.getFriends()) {
+                System.out.println(user.getEmail());
+            }
         }
     }
 
@@ -238,6 +247,15 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
+    public void setAllusers(AllUsers users) {
+        this.users = users;
+    }
+
+    public void test() {
+        //System.out.println(currentUser.getFriends().get(0));
+        System.out.println(getUserByEmail(currentUser.getEmail()).getFriends().get(0).getEmail());
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.users = new Database().ReadUsers();
