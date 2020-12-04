@@ -153,7 +153,7 @@ public class MainPageController implements Initializable {
         for (String m : receiver) {
             a = m;
         }
-        cbc.LoadChat(currentUser.getEmail(), a, currentUser);
+        cbc.LoadChat(currentUser.getEmail(), a);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Fosbook");
